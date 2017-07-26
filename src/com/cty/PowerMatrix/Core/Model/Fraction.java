@@ -74,6 +74,10 @@ public class Fraction extends MatrixItem{
         this.magnitude = magnitude;
     }
 
+    public double add(double d){
+        return this.magnitude+d;
+    }
+
     public void add(Fraction that){
         if (this.getDenominator() == that.getDenominator()) {
             this.setNumerator(this.getNumerator()+that.getNumerator());
@@ -96,6 +100,10 @@ public class Fraction extends MatrixItem{
         return result;
     }
 
+    public double subtract(double d){
+        return this.magnitude - d;
+    }
+
     public void subtract(Fraction that){
         if (this.getDenominator() == that.getDenominator()) {
             this.setNumerator(this.getNumerator() - that.getNumerator());
@@ -110,6 +118,10 @@ public class Fraction extends MatrixItem{
         return this.getAdd(that.getNegative());
     }
 
+    public double multiply(double d){
+        return this.magnitude * d;
+    }
+
     public void multiply(Fraction that){
         this.setNumerator(this.getNumerator() * that.getNumerator());
         this.setDenominator(this.getDenominator()*that.getDenominator());
@@ -122,6 +134,10 @@ public class Fraction extends MatrixItem{
                 this.getDenominator()*that.getDenominator());
         result.simplify();
         return result;
+    }
+
+    public double divide(double d){
+        return this.magnitude / d;
     }
 
     public void divide(Fraction that){

@@ -1,6 +1,7 @@
 package com.cty.PowerMatrix;
 
 import com.cty.PowerMatrix.Core.Model.Fraction;
+import com.cty.PowerMatrix.Core.Model.Matrix;
 import com.cty.PowerMatrix.Core.Util.Euclidian;
 
 public class Main {
