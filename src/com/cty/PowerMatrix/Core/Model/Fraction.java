@@ -1,5 +1,7 @@
 package com.cty.PowerMatrix.Core.Model;
 
+import com.cty.PowerMatrix.Core.Util.Euclidian;
+
 public class Fraction extends MatrixItem{
     private int numerator; //分子
     private int denominator;//分母
@@ -10,7 +12,11 @@ public class Fraction extends MatrixItem{
             this.setNumerator(-1*this.getNumerator());
             this.setDenominator(-1*this.getDenominator());
         }
-
+        int GCD;
+        while ((GCD = Euclidian.calcGCD(numerator,denominator)) != 1){
+            this.setNumerator(this.getNumerator()/GCD);
+            this.setDenominator(this.getDenominator()/GCD);
+        }
     }
 
     public void negative(){
@@ -130,6 +136,6 @@ public class Fraction extends MatrixItem{
 
     @Override
     public String toString() {
-        return numerator + "/"+denominator;
+        return (getDenominator() == 1)?String.valueOf(numerator):numerator + "/"+denominator;
     }
 }
