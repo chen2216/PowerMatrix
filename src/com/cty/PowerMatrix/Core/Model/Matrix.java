@@ -145,23 +145,30 @@ public class Matrix {
     }
 
     public void toEchelon(){
-        /*
-        for(int i = 1;i < this.getRow();i++){
-            for (int j = 0;j < i;j++) {
-                rowOperation(i, j, this.getMatrix()[i][j].getDivide(this.getMatrix()[j][j]).getNegative());
-            }
-        }
-        this.simplify();
-        */
-        for (int j = 0;j < this.getColumn();j++) {
-            for (int i = 0; i < this.getRow(); i++) {
-                if (i == j){
-                    rowOperation(i,this.getMatrix()[i][j].getInverse());
-                }else {
-                    rowOperation(i,j,this.getMatrix()[i][j].getDivide(this.getMatrix()[j][j]).getNegative());
+        int c = 0,h = 0;
+        while(h < getRow() && c < getColumn()){
+            if (getMatrix()[h][c].getMagnitude() == 0){
+                for (int i = h+1;i < getRow();i++){
+                    if (getMatrix()[i][c].getMagnitude() == 0){
+                        continue;
+                    }
+                    swapRow(i,h);
+                    toEchelon();
+                    return;
                 }
+            }else{
+                rowOperation(h, getMatrix()[h][c].getInverse());
+                for (int i = h+1;i<getRow();i++){
+                    rowOperation(i, h, this.getMatrix()[i][c].getDivide(this.getMatrix()[h][c]).getNegative());
+                }
+                h++;
             }
+            c++;
         }
+    }
+
+    private void makeLeadingOnes(){
+
     }
 
     public void rowOperation(int row,Fraction f){
@@ -171,9 +178,15 @@ public class Matrix {
     }
 
     public void toREchelon(){
-        this.toEchelon();
-        for (int i = 0; i < this.getRow();i++){
-            rowOperation(i,getMatrix()[i][i].getInverse());
+        toEchelon();
+        for (int i = getRow() - 1;i >= 0;i--){
+            for (int j = 0;j < getColumn();j++){
+                if (getMatrix()[i][j].getMagnitude() == 1){
+                    for (int k = i - 1;k >= 0;k--){
+                        rowOperation(k,i,this.getMatrix()[k][j].getNegative());
+                    }
+                }
+            }
         }
     }
 

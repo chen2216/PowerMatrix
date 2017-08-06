@@ -84,6 +84,7 @@ public class Fraction {
             this.setDenominator(this.getDenominator()*that.getDenominator());
             this.setNumerator(this.getNumerator()*that.getDenominator()+this.getDenominator()*that.getNumerator());
         }
+        this.generateMagnitude();
         this.simplify();
     }
 
@@ -95,6 +96,7 @@ public class Fraction {
             result = new Fraction(this.numerator*that.denominator+this.denominator*that.numerator,
                     this.denominator*that.denominator);
         }
+        result.generateMagnitude();
         result.simplify();
         return result;
     }
@@ -106,6 +108,7 @@ public class Fraction {
             this.setDenominator(this.getDenominator()*that.getDenominator());
             this.setNumerator(this.getNumerator()*that.getDenominator() - this.getDenominator()*that.getNumerator());
         }
+        this.generateMagnitude();
         this.simplify();
     }
 
@@ -116,6 +119,7 @@ public class Fraction {
     public void multiply(Fraction that){
         this.setNumerator(this.getNumerator() * that.getNumerator());
         this.setDenominator(this.getDenominator()*that.getDenominator());
+        this.generateMagnitude();
         this.simplify();
     }
 
@@ -123,6 +127,7 @@ public class Fraction {
         Fraction result;
         result = new Fraction(this.getNumerator()*that.getNumerator(),
                 this.getDenominator()*that.getDenominator());
+        result.generateMagnitude();
         result.simplify();
         return result;
     }
@@ -130,6 +135,7 @@ public class Fraction {
     public void divide(Fraction that){
         this.setNumerator(this.getNumerator() * that.getDenominator());
         this.setDenominator(this.getDenominator() * that.getNumerator());
+        generateMagnitude();
         this.simplify();
     }
 
