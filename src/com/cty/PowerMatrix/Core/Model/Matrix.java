@@ -1,5 +1,6 @@
 package com.cty.PowerMatrix.Core.Model;
 
+import com.cty.PowerMatrix.Core.Exception.MatrixFormatNotMatchException;
 import com.cty.PowerMatrix.Core.Exception.MatrixNotSquareException;
 import com.cty.PowerMatrix.Core.Util.DoubleToFraction;
 
@@ -49,7 +50,7 @@ public class Matrix {
         StringBuilder sb = new StringBuilder();
         for (int i = 0;i < row;i++){
             for (int j = 0; j<column;j++){
-                sb.append(getMatrix()[i][j].toString() + " ");
+                sb.append((getMatrix()[i][j]!= null)?getMatrix()[i][j].toString() + " ":"null");
             }
             sb.append("\n");
         }
@@ -167,9 +168,6 @@ public class Matrix {
         }
     }
 
-    private void makeLeadingOnes(){
-
-    }
 
     public void rowOperation(int row,Fraction f){
         for (int i = 0;i < this.getColumn();i++){
@@ -190,11 +188,80 @@ public class Matrix {
         }
     }
 
-    public static void main(String[] args) {
-
+    public void add(Matrix that) throws MatrixFormatNotMatchException{
+        if (this.getRow() != that.getRow() || this.getColumn() != that.getColumn())throw new MatrixFormatNotMatchException("Addition");
+        for (int i = 0;i < getRow();i++){
+            for (int j = 0;j < getColumn();j++){
+                getMatrix()[i][j].add(that.getMatrix()[i][j]);
+            }
+        }
     }
 
-    private void reorderMatrix(){
+    public Matrix getAdd(Matrix that) throws MatrixFormatNotMatchException{
+        if (this.getRow() != that.getRow() || this.getColumn() != that.getColumn())throw new MatrixFormatNotMatchException("Addition");
+        Matrix temp = new Matrix(getRow(),getColumn());
+        for (int i = 0;i < temp.getRow();i++){
+            for (int j = 0;j < temp.getColumn();j++){
+                temp.getMatrix()[i][j] = this.getMatrix()[i][j].getAdd(that.getMatrix()[i][j]);
+            }
+        }
+        return temp;
+    }
 
+    public void subtract(Matrix that) throws MatrixFormatNotMatchException{
+        if (this.getRow() != that.getRow() || this.getColumn() != that.getColumn())throw new MatrixFormatNotMatchException("Subtraction");
+        for (int i = 0;i < getRow();i++){
+            for (int j = 0;j < getColumn();j++){
+                getMatrix()[i][j].subtract(that.getMatrix()[i][j]);
+            }
+        }
+    }
+
+    public Matrix getSubtract(Matrix that) throws MatrixFormatNotMatchException{
+        if (this.getRow() != that.getRow() || this.getColumn() != that.getColumn())throw new MatrixFormatNotMatchException("Subtraction");
+        Matrix temp = new Matrix(getRow(),getColumn());
+        for (int i = 0;i < temp.getRow();i++){
+            for (int j = 0;j < temp.getColumn();j++){
+                temp.getMatrix()[i][j] = this.getMatrix()[i][j].getSubtract(that.getMatrix()[i][j]);
+            }
+        }
+        return temp;
+    }
+
+    public Matrix getMultiply(Matrix that) throws MatrixFormatNotMatchException{
+        if (this.getColumn() != that.getRow())throw new MatrixFormatNotMatchException("Multiplication");
+        int bound = this.getColumn();
+        Matrix temp = new Matrix(this.getRow(),that.getColumn());
+        for (int i = 0;i < this.getRow();i++){
+            for (int j = 0;j < that.getColumn();j++){
+                Fraction ft = new Fraction(0,1);
+                for (int k = 0;k < bound;k++){
+                    ft.add(this.getMatrix()[i][k].getMultiply(that.getMatrix()[k][j]));
+                }
+                temp.getMatrix()[i][j] = ft;
+            }
+        }
+        return temp;
+    }
+
+    public void multiply(Matrix that) throws MatrixFormatNotMatchException {
+        Matrix temp = this.getMultiply(that);
+        this.setRow(temp.getRow());
+        this.setColumn(temp.getColumn());
+        this.setMatrix(temp.getMatrix());
+    }
+
+    public Matrix inv() throws MatrixNotSquareException {
+        if (getDeterminant().getMagnitude() == 0){ return null;}
+        Matrix adj = new Matrix(this.getRow(),this.getColumn());
+        for (int i = 0;i < getRow();i++){
+            for (int j = 0;j < getColumn();j++){
+                adj.getMatrix()[i][j] = this.deleteRow(i).deleteColumn(j).getDeterminant().getMultiply(
+                        DoubleToFraction.toFraction(String.valueOf(Math.pow(-1,j+i))));
+                adj.getMatrix()[i][j].divide(this.getDeterminant());
+            }
+        }
+        adj.transpose();
+        return adj;
     }
 }

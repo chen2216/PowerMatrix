@@ -6,6 +6,12 @@ public class Fraction {
     private int denominator;//分母
     private double magnitude; //实际
 
+    public Fraction(){
+        this.denominator = 1;
+        this.numerator = 0;
+        this.generateMagnitude();
+    }
+
     public void simplify(){
         if (numerator < 0 && denominator < 0){
             this.setNumerator(-1*this.getNumerator());

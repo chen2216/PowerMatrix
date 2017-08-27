@@ -7,24 +7,16 @@ import com.cty.PowerMatrix.Core.Util.Euclidian;
 import com.cty.PowerMatrix.Core.Util.MatrixParser;
 
 public class Main {
-    public static void main(String[] args) throws MatrixNotSquareException{
+    public static void main(String[] args) throws Exception{
         MatrixParser mp = new MatrixParser();
-        Matrix matrix = mp.toMatrix("[0 1 2 1;0 2 0 4;0 3 5 3]");
-        //Matrix m1 = mp.toMatrix("[1 0 0 0;0 0 1 0;0 0 0 1]");
-        matrix.transpose();
-        //Matrix matrix = mp.toMatrix("[3 2 1;1 4 1;5 3 1;]");
-        //System.out.println(matrix.toString());
-        //matrix.swapRow(1,2);
-        //matrix = matrix.deleteRow(1);
-        //matrix = matrix.deleteColumn(0);
-        //System.out.println(matrix);
-        //matrix.rowOperation(1,2,3);
-        //System.out.println(matrix.getTranspose());
-        //System.out.println(matrix);
-        System.out.println(matrix);
-        matrix.toREchelon();
-        //m1.toEchelon();
-        //System.out.println(m1);
-        System.out.println(matrix);
+        Matrix m1 = mp.toMatrix("[1 5 3;2 3 8]");
+        Matrix m2 = mp.toMatrix("[3 2;5 6;8 4]");
+        System.out.println(m1);
+        System.out.println(m2);
+        Fraction f1 = new Fraction(0,1);
+        Fraction f2 = new Fraction(2,1);
+        System.out.println(f1.getAdd(f2));
+        m1.multiply(m2);
+        System.out.println(m1);
     }
 }
