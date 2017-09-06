@@ -236,6 +236,8 @@ public class Matrix {
             for (int j = 0;j < that.getColumn();j++){
                 Fraction ft = new Fraction(0,1);
                 for (int k = 0;k < bound;k++){
+                    System.out.println(this.getMatrix()[i][k]+" * " + that.getMatrix()[k][j]+" = " +
+                            this.getMatrix()[i][k].getMultiply(that.getMatrix()[k][j]));
                     ft.add(this.getMatrix()[i][k].getMultiply(that.getMatrix()[k][j]));
                 }
                 temp.getMatrix()[i][j] = ft;

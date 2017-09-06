@@ -3,7 +3,13 @@ package com.cty.PowerMatrix.Core.Util;
 import com.cty.PowerMatrix.Core.Model.Fraction;
 
 public class DoubleToFraction {
+
     public static Fraction toFraction(String str){
+        if (str.contains("/")){
+            return new Fraction(Integer.valueOf(
+                    str.substring(0,str.indexOf("/"))),
+                    Integer.valueOf(str.substring(str.indexOf("/")+1)));
+        }
         String[] array = str.split("\\.");
         int a = Integer.parseInt(array[0]);//获取整数部分
         int b = (array.length == 2)?Integer.parseInt(array[1]):0;//获取小数部分

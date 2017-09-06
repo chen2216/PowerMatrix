@@ -1,5 +1,6 @@
 package com.cty.PowerMatrix.PC;
 
+import com.cty.PowerMatrix.Core.Exception.MatrixFormatNotMatchException;
 import com.cty.PowerMatrix.Core.Exception.MatrixNotSquareException;
 import com.cty.PowerMatrix.Core.Model.Fraction;
 import com.cty.PowerMatrix.Core.Model.Matrix;
@@ -14,6 +15,9 @@ public class Console {
     public void getCommand(String command) throws MatrixNotSquareException {
         String name;
         String op;
+        String param1;
+        String param2;
+
         if (command.contains("=")){
             name = command.substring(0,command.indexOf("=")).trim();
             op = command.substring(command.indexOf("=")+1).trim();
@@ -57,12 +61,44 @@ public class Console {
                     }
                     break;
                 case "add":
+                    param1 = param.substring(0,param.indexOf(","));
+                    param2 = param.substring(param.indexOf(",")+1);
+                    if (map.containsKey(param1) && map.containsKey(param2)){
+                        Matrix temp = null;
+                        try {
+                            temp = map.get(param1).getAdd(map.get(param2));
+                        } catch (MatrixFormatNotMatchException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(op +" = \n" + temp);
+                    }
                     break;
                 case "sbt":
+                    param1 = param.substring(0,param.indexOf(","));
+                    param2 = param.substring(param.indexOf(",")+1);
+                    if (map.containsKey(param1) && map.containsKey(param2)){
+                        Matrix temp = null;
+                        try {
+                            temp = map.get(param1).getSubtract(map.get(param2));
+                        } catch (MatrixFormatNotMatchException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(op +" = \n" + temp);
+                    }
                     break;
                 case "mul":
+                    param1 = param.substring(0,param.indexOf(","));
+                    param2 = param.substring(param.indexOf(",")+1);
+                    if (map.containsKey(param1) && map.containsKey(param2)){
+                        Matrix temp = null;
+                        try {
+                            temp = map.get(param1).getMultiply(map.get(param2));
+                        } catch (MatrixFormatNotMatchException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(op +" = \n" + temp);
+                    }
                     break;
-
             }
         }
 

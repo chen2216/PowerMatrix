@@ -84,27 +84,37 @@ public class Fraction {
     }
 
     public void add(Fraction that){
-        if (this.getDenominator() == that.getDenominator()) {
-            this.setNumerator(this.getNumerator()+that.getNumerator());
-        }else{
-            this.setDenominator(this.getDenominator()*that.getDenominator());
-            this.setNumerator(this.getNumerator()*that.getDenominator()+this.getDenominator()*that.getNumerator());
+        if (numerator == 0){
+            this.numerator = that.numerator;
+            this.denominator = that.denominator;
+            this.getMagnitude();
+        }else {
+            if (this.getDenominator() == that.getDenominator()) {
+                this.setNumerator(this.getNumerator() + that.getNumerator());
+            } else {
+                this.setDenominator(this.getDenominator() * that.getDenominator());
+                this.setNumerator(this.getNumerator() * that.getDenominator() + this.getDenominator() * that.getNumerator());
+            }
+            this.generateMagnitude();
+            this.simplify();
         }
-        this.generateMagnitude();
-        this.simplify();
     }
 
     public Fraction getAdd(Fraction that){
-        Fraction result;
-        if (this.getDenominator() == that.getDenominator()) {
-            result = new Fraction(this.numerator + that.numerator, this.denominator);
-        }else{
-            result = new Fraction(this.numerator*that.denominator+this.denominator*that.numerator,
-                    this.denominator*that.denominator);
+        if (this.numerator == 0){
+            return that;
+        }else {
+            Fraction result;
+            if (this.getDenominator() == that.getDenominator()) {
+                result = new Fraction(this.numerator + that.numerator, this.denominator);
+            } else {
+                result = new Fraction(this.numerator * that.denominator + this.denominator * that.numerator,
+                        this.denominator * that.denominator);
+            }
+            result.generateMagnitude();
+            result.simplify();
+            return result;
         }
-        result.generateMagnitude();
-        result.simplify();
-        return result;
     }
 
     public void subtract(Fraction that){
