@@ -10,16 +10,16 @@ The project now is still far from being finished. There are still tons of functi
   <div id="leftThing" style="position: relative; width:50%; background-color:blue;">
     <img src="https://github.com/cty123/PowerMatrix/raw/master/img1.jpeg" width="300">
   </div>
-  <div id="leftThing" style="position: relative; width:40%; background-color:blue;">
+  <div id="leftThing" style="position: relative; width:50%; background-color:blue;">
     <img src="https://github.com/cty123/PowerMatrix/raw/master/img2.jpeg" width="300">
   </div>
   <div id="leftThing" style="position: relative; width:50%; background-color:blue;">
     <img src="https://github.com/cty123/PowerMatrix/raw/master/img3.jpeg" width="300">
   </div>
-  <div id="leftThing" style="position: relative; width:40%; background-color:blue;">
+  <div id="leftThing" style="position: relative; width:50%; background-color:blue;">
     <img src="https://github.com/cty123/PowerMatrix/raw/master/img4.jpeg" width="300">
   </div>
-    <div id="leftThing" style="position: relative; width:40%; background-color:blue;">
+    <div id="leftThing" style="position: relative; width:50%; background-color:blue;">
     <img src="https://github.com/cty123/PowerMatrix/raw/master/img5.jpeg" width="300">
   </div>
 </div>
